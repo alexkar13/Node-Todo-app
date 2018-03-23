@@ -1,6 +1,9 @@
 const {MongoClient} = require('mongodb');
 const yargs = require('yargs');
 
+const crud = require('./crud');
+
+
 var argv = yargs
     .options({
         s: {
@@ -13,9 +16,6 @@ var argv = yargs
     .help()
     .alias('help', 'h')
     .argv;
-
-
-const crud = require('./crud');
 
 const months = [
     {
@@ -78,6 +78,8 @@ MongoClient.connect('mongodb://localhost:27017/Months', (err, client) => {
     
     // crud.insertData(months, db, 'months');
     if (argv.season){
+        console.log(argv.season);
+        
         crud.selectSeason(argv.season, db, 'months'); 
     }
     client.close();
